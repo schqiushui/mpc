@@ -95,7 +95,7 @@ check_PROGRAMS = tabs$(EXEEXT) tacos$(EXEEXT) tacosh$(EXEEXT) \
 	tsqr$(EXEEXT) tsqrt$(EXEEXT) tstrtoc$(EXEEXT) tsub$(EXEEXT) \
 	tsub_fr$(EXEEXT) tsub_ui$(EXEEXT) tswap$(EXEEXT) ttan$(EXEEXT) \
 	ttanh$(EXEEXT) tui_div$(EXEEXT) tui_ui_sub$(EXEEXT) \
-	tget_version$(EXEEXT)
+	tget_version$(EXEEXT) exceptions$(EXEEXT)
 subdir = tests
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/depcomp $(top_srcdir)/test-driver
@@ -121,6 +121,11 @@ AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
+exceptions_SOURCES = exceptions.c
+exceptions_OBJECTS = exceptions.$(OBJEXT)
+exceptions_LDADD = $(LDADD)
+exceptions_DEPENDENCIES = libmpc-tests.la \
+	$(top_builddir)/src/libmpc.la
 tabs_SOURCES = tabs.c
 tabs_OBJECTS = tabs.$(OBJEXT)
 tabs_LDADD = $(LDADD)
@@ -413,25 +418,25 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(libmpc_tests_la_SOURCES) tabs.c tacos.c tacosh.c tadd.c \
-	tadd_fr.c tadd_si.c tadd_ui.c targ.c tasin.c tasinh.c tatan.c \
-	tatanh.c tconj.c tcos.c tcosh.c tdiv.c tdiv_2si.c tdiv_2ui.c \
-	tdiv_fr.c tdiv_ui.c texp.c tfma.c tfr_div.c tfr_sub.c \
-	tget_version.c timag.c tio_str.c tlog.c tlog10.c tmul.c \
-	tmul_2si.c tmul_2ui.c tmul_fr.c tmul_i.c tmul_si.c tmul_ui.c \
-	tneg.c tnorm.c tpow.c tpow_d.c tpow_fr.c tpow_ld.c tpow_si.c \
-	tpow_ui.c tpow_z.c tprec.c tproj.c treal.c treimref.c tset.c \
-	tsin.c tsin_cos.c tsinh.c tsqr.c tsqrt.c tstrtoc.c tsub.c \
-	tsub_fr.c tsub_ui.c tswap.c ttan.c ttanh.c tui_div.c \
-	tui_ui_sub.c
-DIST_SOURCES = $(libmpc_tests_la_SOURCES) tabs.c tacos.c tacosh.c \
-	tadd.c tadd_fr.c tadd_si.c tadd_ui.c targ.c tasin.c tasinh.c \
-	tatan.c tatanh.c tconj.c tcos.c tcosh.c tdiv.c tdiv_2si.c \
-	tdiv_2ui.c tdiv_fr.c tdiv_ui.c texp.c tfma.c tfr_div.c \
-	tfr_sub.c tget_version.c timag.c tio_str.c tlog.c tlog10.c \
-	tmul.c tmul_2si.c tmul_2ui.c tmul_fr.c tmul_i.c tmul_si.c \
-	tmul_ui.c tneg.c tnorm.c tpow.c tpow_d.c tpow_fr.c tpow_ld.c \
-	tpow_si.c tpow_ui.c tpow_z.c tprec.c tproj.c treal.c \
+SOURCES = $(libmpc_tests_la_SOURCES) exceptions.c tabs.c tacos.c \
+	tacosh.c tadd.c tadd_fr.c tadd_si.c tadd_ui.c targ.c tasin.c \
+	tasinh.c tatan.c tatanh.c tconj.c tcos.c tcosh.c tdiv.c \
+	tdiv_2si.c tdiv_2ui.c tdiv_fr.c tdiv_ui.c texp.c tfma.c \
+	tfr_div.c tfr_sub.c tget_version.c timag.c tio_str.c tlog.c \
+	tlog10.c tmul.c tmul_2si.c tmul_2ui.c tmul_fr.c tmul_i.c \
+	tmul_si.c tmul_ui.c tneg.c tnorm.c tpow.c tpow_d.c tpow_fr.c \
+	tpow_ld.c tpow_si.c tpow_ui.c tpow_z.c tprec.c tproj.c treal.c \
+	treimref.c tset.c tsin.c tsin_cos.c tsinh.c tsqr.c tsqrt.c \
+	tstrtoc.c tsub.c tsub_fr.c tsub_ui.c tswap.c ttan.c ttanh.c \
+	tui_div.c tui_ui_sub.c
+DIST_SOURCES = $(libmpc_tests_la_SOURCES) exceptions.c tabs.c tacos.c \
+	tacosh.c tadd.c tadd_fr.c tadd_si.c tadd_ui.c targ.c tasin.c \
+	tasinh.c tatan.c tatanh.c tconj.c tcos.c tcosh.c tdiv.c \
+	tdiv_2si.c tdiv_2ui.c tdiv_fr.c tdiv_ui.c texp.c tfma.c \
+	tfr_div.c tfr_sub.c tget_version.c timag.c tio_str.c tlog.c \
+	tlog10.c tmul.c tmul_2si.c tmul_2ui.c tmul_fr.c tmul_i.c \
+	tmul_si.c tmul_ui.c tneg.c tnorm.c tpow.c tpow_d.c tpow_fr.c \
+	tpow_ld.c tpow_si.c tpow_ui.c tpow_z.c tprec.c tproj.c treal.c \
 	treimref.c tset.c tsin.c tsin_cos.c tsinh.c tsqr.c tsqrt.c \
 	tstrtoc.c tsub.c tsub_fr.c tsub_ui.c tswap.c ttan.c ttanh.c \
 	tui_div.c tui_ui_sub.c
@@ -868,6 +873,10 @@ clean-checkPROGRAMS:
 	echo " rm -f" $$list; \
 	rm -f $$list
 
+exceptions$(EXEEXT): $(exceptions_OBJECTS) $(exceptions_DEPENDENCIES) $(EXTRA_exceptions_DEPENDENCIES) 
+	@rm -f exceptions$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(exceptions_OBJECTS) $(exceptions_LDADD) $(LIBS)
+
 tabs$(EXEEXT): $(tabs_OBJECTS) $(tabs_DEPENDENCIES) $(EXTRA_tabs_DEPENDENCIES) 
 	@rm -f tabs$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(tabs_OBJECTS) $(tabs_LDADD) $(LIBS)
@@ -1131,6 +1140,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/comparisons.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/exceptions.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/random.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/read_data.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tabs.Po@am__quote@
@@ -1863,6 +1873,13 @@ tui_ui_sub.log: tui_ui_sub$(EXEEXT)
 tget_version.log: tget_version$(EXEEXT)
 	@p='tget_version$(EXEEXT)'; \
 	b='tget_version'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+exceptions.log: exceptions$(EXEEXT)
+	@p='exceptions$(EXEEXT)'; \
+	b='exceptions'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \

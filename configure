@@ -14554,7 +14554,7 @@ fi
 
          { $as_echo "$as_me:${as_lineno-$LINENO}: checking for current git version" >&5
 $as_echo_n "checking for current git version... " >&6; }
-         GITVERSION=2c6bccf
+         GITVERSION=b1870e2
 
 
          { $as_echo "$as_me:${as_lineno-$LINENO}: result: $GITVERSION" >&5
