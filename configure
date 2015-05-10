@@ -682,6 +682,7 @@ CC
 SED
 EGREP
 GREP
+VALGRIND_OPTS
 VALGRIND
 host_os
 host_vendor
@@ -3127,35 +3128,36 @@ done
 
   fi
 
-  OPTS="-q --error-exitcode=1 --leak-check=full"
+  VALGRIND_OPTS="-q --error-exitcode=1 --leak-check=full"
 
+  { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether valgrind is working" >&5
+$as_echo_n "checking whether valgrind is working... " >&6; }
   if test -n "$VALGRIND" \
-     && $VALGRIND $OPTS $SHELL -c 'exit 0' > /dev/null 2>&1; then
-    opt_valgrind_tests=yes
-    VALGRIND="$VALGRIND $OPTS"
+     && $VALGRIND $VALGRIND_OPTS $SHELL -c 'exit 0' > /dev/null 2>&1; then
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+$as_echo "#define MPC_USE_VALGRIND 1" >>confdefs.h
+
 # Addition AE: enable suppression file through a shell variable
     { $as_echo "$as_me:${as_lineno-$LINENO}: checking for valgrind suppression file" >&5
 $as_echo_n "checking for valgrind suppression file... " >&6; }
     if test -n "$VALGRIND_SUPPRESSION"; then
        { $as_echo "$as_me:${as_lineno-$LINENO}: result: $VALGRIND_SUPPRESSION" >&5
 $as_echo "$VALGRIND_SUPPRESSION" >&6; }
-       VALGRIND="$VALGRIND --suppressions=$VALGRIND_SUPPRESSION"
+       VALGRIND_OPTS="$VALGRIND_OPTS --suppressions=$VALGRIND_SUPPRESSION"
     else
        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
     fi
-
-$as_echo "#define MPC_USE_VALGRIND 1" >>confdefs.h
-
   else
-    opt_valgrind_tests=no
+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
     VALGRIND=
+    VALGRIND_OPTS=
   fi
 
-  { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether self tests are run under valgrind" >&5
-$as_echo_n "checking whether self tests are run under valgrind... " >&6; }
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $opt_valgrind_tests" >&5
-$as_echo "$opt_valgrind_tests" >&6; }
+
  ;;
                  no)  ;;
                  *)   as_fn_error $? "Bad value for --enable-valgrind-tests: Use yes or no" "$LINENO" 5 ;;
@@ -14554,7 +14556,7 @@ fi
 
          { $as_echo "$as_me:${as_lineno-$LINENO}: checking for current git version" >&5
 $as_echo_n "checking for current git version... " >&6; }
-         GITVERSION=b1870e2
+         GITVERSION=01cde63
 
 
          { $as_echo "$as_me:${as_lineno-$LINENO}: result: $GITVERSION" >&5
