@@ -13840,6 +13840,41 @@ fi
 rm -f core conftest.err conftest.$ac_objext \
     conftest$ac_exeext conftest.$ac_ext
 
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for mpfr_fmma" >&5
+$as_echo_n "checking for mpfr_fmma... " >&6; }
+LIBS="-lmpfr $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include "mpfr.h"
+int
+main ()
+{
+mpfr_t x; mpfr_fmma (x, x, x, x, x, 0);
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+$as_echo "#define HAVE_MPFR_FMMA 1" >>confdefs.h
+
+
+else
+
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+$as_echo "#define HAVE_MPFR_FMMA 0" >>confdefs.h
+
+
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+
 # Check for a recent GMP
 # We only guarantee that with a *functional* and recent enough GMP version,
 # MPC will compile; we do not guarantee that GMP will compile.
@@ -14556,7 +14591,7 @@ fi
 
          { $as_echo "$as_me:${as_lineno-$LINENO}: checking for current git version" >&5
 $as_echo_n "checking for current git version... " >&6; }
-         GITVERSION=01cde63
+         GITVERSION=82f9c4d
 
 
          { $as_echo "$as_me:${as_lineno-$LINENO}: result: $GITVERSION" >&5
